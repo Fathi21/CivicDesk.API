@@ -1,0 +1,6 @@
+@CivicDesk.API_HostAddress = http://localhost:5136
+
+GET {{CivicDesk.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
