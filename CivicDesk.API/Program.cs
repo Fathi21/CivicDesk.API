@@ -14,6 +14,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IServiceRequestService, ServiceRequestService>();
 builder.Services.AddScoped<IChatService, ChatService>();
 
+builder.Services.AddHttpClient("gemma", client =>
+{
+    var baseUrl = builder.Configuration["Gemma:BaseUrl"] 
+                  ?? "http://localhost:11434/v1/";
+
+    client.BaseAddress = new Uri(baseUrl);
+});
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowClient", policy =>

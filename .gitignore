@@ -1,0 +1,9 @@
+# Build folders
+bin/
+obj/
+
+# Local settings (don’t push secrets)
+CivicDesk.API/appsettings.Development.json
+
+# macOS file
+.DS_Store

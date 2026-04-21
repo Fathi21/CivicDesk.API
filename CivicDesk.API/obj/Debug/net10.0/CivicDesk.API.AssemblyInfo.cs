@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CivicDesk.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+56f3e4c156737adfa6ce08c057913ac468601794")]
 [assembly: System.Reflection.AssemblyProductAttribute("CivicDesk.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CivicDesk.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

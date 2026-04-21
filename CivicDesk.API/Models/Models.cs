@@ -5,10 +5,12 @@ namespace CivicDesk.API.Models
     // ENUMS
     public enum RequestType
     {
-        General,
-        Technical,
-        Complaint,
-        Other
+        Pothole = 0,
+        MissedBin = 1,
+        NoiseComplaint = 2,
+        PlanningQuery = 3,
+        StreetLighting = 4,
+        Other = 5
     }
 
     public enum RequestStatus
