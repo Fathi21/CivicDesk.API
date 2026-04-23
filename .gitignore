@@ -2,8 +2,9 @@
 bin/
 obj/
 
-# Local settings (don’t push secrets)
+# Secrets / local config
+appsettings.json
 CivicDesk.API/appsettings.Development.json
 
-# macOS file
+# macOS
 .DS_Store

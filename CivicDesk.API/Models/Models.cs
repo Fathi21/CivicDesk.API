@@ -1,5 +1,3 @@
-using System;
-
 namespace CivicDesk.API.Models
 {
     // ENUMS
@@ -42,6 +40,14 @@ namespace CivicDesk.API.Models
 
         public string? AdminNotes { get; set; } // nullable
 
+        public DateTime CreatedAt { get; set; }
+    }
+
+    public class AdminUser
+    {
+        public int Id { get; set; }
+        public string Username { get; set; } = string.Empty;
+        public string PasswordHash { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
     }
 

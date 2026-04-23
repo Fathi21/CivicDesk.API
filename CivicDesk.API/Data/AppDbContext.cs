@@ -9,6 +9,7 @@ public class AppDbContext : DbContext
 
     public DbSet<ServiceRequest> ServiceRequests => Set<ServiceRequest>();
     public DbSet<ChatMessage> ChatMessages => Set<ChatMessage>();
+    public DbSet<AdminUser> AdminUsers => Set<AdminUser>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -31,6 +32,14 @@ public class AppDbContext : DbContext
             e.Property(x => x.SessionId).HasMaxLength(50).IsRequired();
             e.Property(x => x.Role).HasMaxLength(20).IsRequired();
             e.Property(x => x.Content).HasMaxLength(4000).IsRequired();
+        });
+
+        modelBuilder.Entity<AdminUser>(e =>
+        {
+            e.HasKey(x => x.Id);
+            e.HasIndex(x => x.Username).IsUnique();
+            e.Property(x => x.Username).HasMaxLength(100).IsRequired();
+            e.Property(x => x.PasswordHash).IsRequired();
         });
     }
 }

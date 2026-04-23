@@ -28,6 +28,10 @@ public record UpdateStatusDto(
     string? AdminNotes
 );
 
+public record LoginDto(string Username, string Password);
+
+public record AuthTokenDto(string Token, DateTime ExpiresAt);
+
 public record ChatMessageDto(
     string SessionId,
     string Message
