@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using CivicDesk.API.DTOs;
@@ -23,7 +24,7 @@ public class ServiceRequestsController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
     }
 
-    [Authorize]
+    [Authorize(Roles = "admin")]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -45,7 +46,18 @@ public class ServiceRequestsController : ControllerBase
         return result is null ? NotFound() : Ok(result);
     }
 
-    [Authorize]
+    [Authorize(Roles = "resident")]
+    [HttpGet("my")]
+    public async Task<IActionResult> GetMyRequests()
+    {
+        var email = User.FindFirstValue(ClaimTypes.Email);
+        if (email is null) return Unauthorized();
+
+        var results = await _service.GetByEmailAsync(email);
+        return Ok(results);
+    }
+
+    [Authorize(Roles = "admin")]
     [HttpPatch("{id:int}/status")]
     public async Task<IActionResult> UpdateStatus(int id, [FromBody] UpdateStatusDto dto)
     {

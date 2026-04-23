@@ -12,6 +12,7 @@ public interface IServiceRequestService
     Task<ServiceRequestDto?> GetByReferenceAsync(string reference);
     Task<List<ServiceRequestDto>> GetAllAsync();
     Task<ServiceRequestDto?> UpdateStatusAsync(int id, UpdateStatusDto dto);
+    Task<List<ServiceRequestDto>> GetByEmailAsync(string email);
 }
 
 public class ServiceRequestService : IServiceRequestService
@@ -57,6 +58,15 @@ public class ServiceRequestService : IServiceRequestService
     public async Task<List<ServiceRequestDto>> GetAllAsync()
     {
         var requests = await _db.ServiceRequests
+            .OrderByDescending(x => x.CreatedAt)
+            .ToListAsync();
+        return requests.Select(ToDto).ToList();
+    }
+
+    public async Task<List<ServiceRequestDto>> GetByEmailAsync(string email)
+    {
+        var requests = await _db.ServiceRequests
+            .Where(x => x.Email == email)
             .OrderByDescending(x => x.CreatedAt)
             .ToListAsync();
         return requests.Select(ToDto).ToList();

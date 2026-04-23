@@ -30,6 +30,8 @@ public record UpdateStatusDto(
 
 public record LoginDto(string Username, string Password);
 
+public record ResidentLoginDto(string Email, string ReferenceNumber);
+
 public record AuthTokenDto(string Token, DateTime ExpiresAt);
 
 public record ChatMessageDto(
