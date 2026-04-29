@@ -1,0 +1,46 @@
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    platform: linux/amd64
+    environment:
+      SA_PASSWORD: ${DB_PASSWORD}
+      ACCEPT_EULA: Y
+      MSSQL_MEMORY_LIMIT_MB: 512
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqldata:/var/opt/mssql
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "${DB_PASSWORD}", "-Q", "SELECT 1", "-No"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./CivicDesk.API
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db,1433;Database=CivicDesk;User Id=sa;Password=${DB_PASSWORD};TrustServerCertificate=True
+      - Gemma__BaseUrl=http://host.docker.internal:11434/v1/
+      - Gemma__Model=${GEMMA_MODEL}
+      - Jwt__Secret=${JWT_SECRET}
+      - Jwt__Issuer=CivicDesk
+      - Jwt__Audience=CivicDesk
+      - Jwt__ExpiresInHours=24
+      - ASPNETCORE_URLS=http://+:5000
+    ports:
+      - "5050:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  client:
+    build:
+      context: ../CivicDesk-client/civicdesk-client
+    ports:
+      - "5173:80"
+    depends_on:
+      - api
+
+volumes:
+  sqldata:

@@ -1,10 +1,32 @@
-# Build folders
+# ── Build output ──────────────────────────────────────────────────────────────
 bin/
 obj/
+publish/
 
-# Secrets / local config
-appsettings.json
+# ── Test output ───────────────────────────────────────────────────────────────
+TestResults/
+*.trx
+*.coverage
+
+# ── Secrets & local config ────────────────────────────────────────────────────
+.env
 CivicDesk.API/appsettings.Development.json
 
-# macOS
+# ── Visual Studio / Rider ─────────────────────────────────────────────────────
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+
+# ── NuGet ─────────────────────────────────────────────────────────────────────
+*.nupkg
+.nuget/
+
+# ── macOS ─────────────────────────────────────────────────────────────────────
 .DS_Store
+.AppleDouble
+
+# ── Windows ───────────────────────────────────────────────────────────────────
+Thumbs.db
+Desktop.ini

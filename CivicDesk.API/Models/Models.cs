@@ -13,10 +13,11 @@ namespace CivicDesk.API.Models
 
     public enum RequestStatus
     {
-        Pending,
-        InProgress,
-        Resolved,
-        Rejected
+        Submitted = 0,
+        InReview = 1,
+        InProgress = 2,
+        Resolved = 3,
+        Closed = 4
     }
 
     // ENTITIES

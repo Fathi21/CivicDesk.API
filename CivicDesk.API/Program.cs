@@ -40,6 +40,7 @@ builder.Services.AddHttpClient("gemma", client =>
     var baseUrl = builder.Configuration["Gemma:BaseUrl"]
                   ?? "http://localhost:11434/v1/";
     client.BaseAddress = new Uri(baseUrl);
+    client.Timeout = TimeSpan.FromMinutes(5);
 });
 
 var jwtSecret = builder.Configuration["Jwt:Secret"]
@@ -116,11 +117,8 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors("AllowClient");
 app.UseAuthentication();
